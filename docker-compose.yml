@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  db:
+    container_name: bookmart_db
+    image: biarms/mysql
+    environment:
+      MYSQL_DATABASE: bookmart
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    volumes:
+      - pdb:/var/lib/mysql/
+
+  server:
+    container_name: bookmart_server
+    build: $PWD/bookmart-backend/
+    volumes:
+      - $PWD/bookmart-backend:/var/www
+
+  frontend:
+    container_name: bookmart_frontend
+    image: nginx
+    ports:
+      - 8081:80
+      - 8082:8080
+    volumes:
+      - $PWD/bookmart-frontend/dist:/usr/share/nginx/html:ro
+      - $PWD/bookmart-backend:/var/www
+      - $PWD/nginx.conf:/etc/nginx/conf.d/default.conf
+
+volumes:
+  pdb:

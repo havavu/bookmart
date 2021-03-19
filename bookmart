@@ -1,0 +1,41 @@
+server {
+    server_name bookmart.duckdns.org;
+    listen 443 ssl; # managed by Certbot
+
+    access_log /var/log/nginx/reverse-access.log;
+    error_log /var/log/nginx/reverse-error.log;
+    location / {
+       proxy_pass http://localhost:8081;
+    }
+}
+
+server {
+    server_name be.bookmart.duckdns.org;
+    listen 443 ssl; # managed by Certbot
+
+    access_log /var/log/nginx/reverse-access.log;
+    error_log /var/log/nginx/reverse-error.log;
+    location / {
+       proxy_pass http://localhost:8082;
+    }
+}
+
+server {
+    if ($host = bookmart.duckdns.org) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    server_name bookmart.duckdns.org;
+    listen 80;
+    return 404; # managed by Certbot
+}
+
+server {
+    if ($host = be.bookmart.duckdns.org) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    server_name be.bookmart.duckdns.org;
+    listen 80;
+    return 404; # managed by Certbot
+}
