@@ -1,5 +1,6 @@
 # bookmart
 A simple community based web app for reviewing &amp; bookmarking
 
-- [web](https://bookmart.duckdns.org)
-- [playground](https://be.bookmart.duckdns.org/graphql-playground)
+- [web](http://bookmart.byethost7.com)
+- [accounts](https://github.com/anhvuk13/bookmart-backend/blob/report/INFO.md)
+- [further information](https://github.com/anhvuk13/bookmart-backend/blob/master/README.md)
